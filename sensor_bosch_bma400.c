@@ -1,5 +1,6 @@
 
 #include "sensor_bosch_bma400.h"
+#include "drivers\dev_i2c.h"
 
 #define DBG_ENABLE
 #define DBG_LEVEL DBG_LOG
@@ -31,7 +32,7 @@ static int8_t rt_i2c_write_reg(void *intf_ptr, uint8_t addr, uint8_t reg, uint8_
 
     if (rt_i2c_transfer(intf_ptr, msgs, 2) != 2)
     {
-        return -RT_ERROR;
+        return (int8_t)-RT_ERROR;
     }
 
     return RT_EOK;
@@ -54,7 +55,7 @@ static int8_t rt_i2c_read_reg(void *intf_ptr, uint8_t addr, uint8_t reg, uint8_t
 
     if (rt_i2c_transfer(intf_ptr, msgs, 2) != 2)
     {
-        return -RT_ERROR;
+        return (int8_t)-RT_ERROR;
     }
 
     return RT_EOK;
