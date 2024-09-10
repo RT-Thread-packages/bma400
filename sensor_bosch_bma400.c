@@ -1,6 +1,5 @@
 
 #include "sensor_bosch_bma400.h"
-#include "drivers\dev_i2c.h"
 
 #define DBG_ENABLE
 #define DBG_LEVEL DBG_LOG
@@ -222,7 +221,7 @@ static rt_err_t _bma400_set_power(rt_sensor_t sensor, rt_uint8_t power)
     return rslt;
 }
 
-static rt_size_t bma400_fetch_data(struct rt_sensor_device *sensor, void *buf, rt_size_t len)
+static RT_SIZE_TYPE bma400_fetch_data(struct rt_sensor_device *sensor, void *buf, rt_size_t len)
 {
     struct bma400_dev *_bma400_dev = sensor->parent.user_data;
     struct rt_sensor_data *data = buf;
@@ -282,8 +281,8 @@ static rt_err_t bma400_control(struct rt_sensor_device *sensor, int cmd, void *a
 
 static struct rt_sensor_ops sensor_ops =
 {
-    bma400_fetch_data,
-    bma400_control
+    bma400_fetch_data, 
+    bma400_control  
 };
 
 int rt_hw_bma400_init(const char *name, struct rt_sensor_config *cfg)
@@ -299,7 +298,6 @@ int rt_hw_bma400_init(const char *name, struct rt_sensor_config *cfg)
         return -RT_ERROR;
     }
 
-#ifdef PKG_USING_BMA400_ACCE
     /* accelerometer sensor register */
     {
         sensor_acce = rt_calloc(1, sizeof(struct rt_sensor_device));
@@ -326,8 +324,7 @@ int rt_hw_bma400_init(const char *name, struct rt_sensor_config *cfg)
             return -RT_ERROR;
         }
     }
-#endif
-#ifdef PKG_USING_BMA400_STEP
+    
     /* step sensor register */
     {
         sensor_step = rt_calloc(1, sizeof(struct rt_sensor_device));
@@ -351,7 +348,7 @@ int rt_hw_bma400_init(const char *name, struct rt_sensor_config *cfg)
             goto __exit;
         }
     }
-#endif
+    
     return RT_EOK;
 
 __exit:
