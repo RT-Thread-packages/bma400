@@ -5,10 +5,8 @@ src   = []
 cwd   = GetCurrentDir()
 
 # add bma400 src files.
+src += Glob('sensor_bosch_bma400.c')
 src += Glob('libraries/bma400.c')
-
-if GetDepend('PKG_BMA400_USING_SENSOR_V1'):
-    src += ['sensor_bosch_bma400.c']
 
 # add bma400 include path.
 path  = [cwd, cwd + '/libraries']

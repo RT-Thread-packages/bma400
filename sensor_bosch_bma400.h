@@ -4,12 +4,6 @@
 #define SENSOR_BOS_BMA400_H__
 
 #include <rtthread.h>
-#include "bma400.h"
-
-#define BMA400_ADDR_DEFAULT (BMA400_I2C_ADDRESS_SDO_LOW)
-
-#if defined(RT_USING_SENSOR)
-
 #if defined(RT_VERSION_CHECK)
     #if (RTTHREAD_VERSION >= RT_VERSION_CHECK(5, 0, 2))
         #define RT_SIZE_TYPE   rt_ssize_t
@@ -30,9 +24,10 @@
     #endif
     
 #endif
+#include "bma400.h"
+
+#define BMA400_ADDR_DEFAULT (BMA400_I2C_ADDRESS_SDO_LOW)
 
 int rt_hw_bma400_init(const char *name, struct rt_sensor_config *cfg);
-
-#endif
 
 #endif
