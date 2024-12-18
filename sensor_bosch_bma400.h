@@ -12,12 +12,6 @@
     #else
         #define RT_SIZE_TYPE   rt_size_t
     #endif
-
-    #if (RTTHREAD_VERSION >= RT_VERSION_CHECK(5, 2, 0))
-        #include <drivers/dev_i2c.h>
-    #else
-        #include <drivers/i2c.h>
-    #endif
     
 #endif
 #include "bma400.h"
