@@ -31,7 +31,7 @@ static int8_t rt_i2c_write_reg(void *intf_ptr, uint8_t addr, uint8_t reg, uint8_
 
     if (rt_i2c_transfer(intf_ptr, msgs, 2) != 2)
     {
-        return -RT_ERROR;
+        return (int8_t)-RT_ERROR;
     }
 
     return RT_EOK;
@@ -54,7 +54,7 @@ static int8_t rt_i2c_read_reg(void *intf_ptr, uint8_t addr, uint8_t reg, uint8_t
 
     if (rt_i2c_transfer(intf_ptr, msgs, 2) != 2)
     {
-        return -RT_ERROR;
+        return (int8_t)-RT_ERROR;
     }
 
     return RT_EOK;
@@ -221,7 +221,7 @@ static rt_err_t _bma400_set_power(rt_sensor_t sensor, rt_uint8_t power)
     return rslt;
 }
 
-static rt_size_t bma400_fetch_data(struct rt_sensor_device *sensor, void *buf, rt_size_t len)
+static RT_SIZE_TYPE bma400_fetch_data(struct rt_sensor_device *sensor, void *buf, rt_size_t len)
 {
     struct bma400_dev *_bma400_dev = sensor->parent.user_data;
     struct rt_sensor_data *data = buf;
